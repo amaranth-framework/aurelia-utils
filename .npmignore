@@ -1,3 +1,12 @@
 jspm_packages
 bower_components
+node_modules
+
 .idea
+.vscode
+
+build
+docs
+test
+
+ISSUE_TEMPLATE.md

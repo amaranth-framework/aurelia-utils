@@ -50,7 +50,7 @@
  */
 
 import { className, extend } from 'amaranth-utils';
-import { inject } from 'aurelia-framework';
+// import { inject } from 'aurelia-framework';
 
 import { Base } from './base';
 
@@ -69,7 +69,7 @@ import { Base } from './base';
  * @implements {RoutableComponentCanDeactivate}
  * @implements {RoutableComponentDeactivate}
  */
-@inject(Messages)
+// @inject(Messages)
 export class View extends Base {
     /*************************************************************************************
      * Inherited
@@ -78,15 +78,13 @@ export class View extends Base {
      * @see Base#constructor
      * @param {Messages} messages
      */
-    constructor(messages, ...args) {
-        super(...args);
-        /**
-         * @type {Messages}
-         */
-        this.messages = messages;
-
-        // this.logger.debug('test-life constructor', ...args);
-    }
+    // constructor(messages, ...args) {
+    //     super(...args);
+    //     /**
+    //      * @type {Messages}
+    //      */
+    //     this.messages = messages;
+    // }
     /**
      * Invoked when the databinding engine binds the view. The binding context is the instance that the view is
      * databound to.
@@ -99,6 +97,7 @@ export class View extends Base {
     bind(bindingContext, overrideContext, _systemUpdate = true) {
         // this.logger.debug('test-life bind', bindingContext, overrideContext, _systemUpdate);
         /**
+         * Parent view/model
          * @type {Object}
          */
         this.parent = overrideContext.parentOverrideContext.bindingContext;
@@ -127,13 +126,6 @@ export class View extends Base {
     detached(...args) {
         // this.logger.debug('test-life detached', ...args);
         this.disposeEvents();
-    }
-    /**
-     * Obtain the generated html element
-     * @return {HTMLElement}
-     */
-    get htmlElement() {
-        return document.querySelector(`[am-uuid="${this.__uuid}"]`);
     }
     /**
      * Specific init function for each model view. AbstravView will call it at the end of the activate method.
@@ -173,13 +165,6 @@ export class View extends Base {
             );
             // this.logger.debug('ModelView::mergeSettings => settings:', this.settings);
         }
-    }
-    /**
-     * Convert View to string
-     * @return {String}
-     */
-    toString() {
-        return `${className(this)}@${this.__uuid}`;
     }
     /**
      * Getter for component override settings. This settings should globaly override settings defined in a component's

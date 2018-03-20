@@ -6,6 +6,8 @@
  * @license   https://github.com/amaranth-framework/aurelia-skeleton/LICENSE MIT License
  */
 
+import _ from 'lodash';
+
 import { View } from './view';
 
 /**
@@ -14,6 +16,16 @@ import { View } from './view';
  */
 export class Template extends View {
     /**
+     * Constructor
+     */
+    constructor(...args) {
+        super(...args);
+        /**
+         * @type {Object}
+         */
+        this.settings = (this.activeRoute || {}).settings | {};
+    }
+    /**
      * @see http://aurelia.io/docs/api/router/interface/RoutableComponentActivate/method/activate
      * @return {void}
      */
@@ -21,6 +33,13 @@ export class Template extends View {
         if (!this.__initialized) {
             this.init();
         }
+    }
+    /**
+     * Obtain current navigation instruction for the application.
+     * @return {NavigationInstructions|null}
+     */
+    get activeRoute() {
+        return (this.router || {}).currentInstruction;
     }
     /**
      * @return {void}
@@ -32,9 +51,7 @@ export class Template extends View {
         const BODY = document.querySelector('body');
         BODY.className = BODY.className.replace(/page-[^ ]+ /gi, '');
         // step two: add all new classes (if present) prepending 'page-' prefix to each one
-        if (this.settings && this.settings.style) {
-            BODY.className = this.settings.style.split(' ').map(name => `page-${name} `).join('');
-        }
+        BODY.className += _.get(this, 'settings.style', '').split(' ').map(name => `page-${name} `).join('');
     }
     /**
      * Set default activationStrategy

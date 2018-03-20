@@ -8,9 +8,17 @@
 
 import { View } from './view';
 
-const MODE_COMPOSE = 'compose';
+/**
+ * Component mode: <compose>
+ * @type {String}
+ */
+export const MODE_COMPOSE = 'compose';
 
-const MODE_CUSTOM_ELEMENT = 'custom-element';
+/**
+ * Component mode: <custom-element></custom-element>
+ * @type {String}
+ */
+export const MODE_CUSTOM_ELEMENT = 'custom-element';
 
 /**
  * Abstract Component View (usable with <compose>)
@@ -55,5 +63,12 @@ export class Component extends View {
             this.init();
             this.__mode = MODE_CUSTOM_ELEMENT;
         }
+    }
+    /**
+     * Obtain the generated html element
+     * @return {HTMLElement}
+     */
+    get htmlElement() {
+        return document.querySelector(`[am-uuid="${this.__uuid}"]`);
     }
 }

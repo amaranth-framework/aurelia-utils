@@ -10,7 +10,7 @@
  * @external {AureliaConfiguration} https://github.com/Vheissu/aurelia-configuration
  */
 /**
- * @external {Aurelia.NavigationInstructions} http://aurelia.io/docs/api/router/interface/NavigationInstructions
+ * @external {NavigationInstructions} http://aurelia.io/docs/api/router/interface/NavigationInstructions
  */
 /**
  * @external {EventAggregator} http://aurelia.io/docs/api/event-aggregator
@@ -24,18 +24,14 @@
 /**
  * @external {Router} http://aurelia.io/docs/api/router
  */
-/**
- * @external {UUID} https://github.com/pnegri/uuid-js
- */
 
 // import { inject, LogManager } from 'aurelia-framework';
-import { className, parentClassName, traits, traitsExclude } from 'amaranth-utils';
+import { className, parentClassName, traits, traitsExclude, uuid } from 'amaranth-utils';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { AureliaConfiguration } from 'aurelia-configuration';
 import { inject } from 'aurelia-framework';
 import { I18N } from 'aurelia-i18n';
 import { Router } from 'aurelia-router';
-import UUID from 'uuid-js';
 
 import { Eventable, Loggable } from '../traits';
 
@@ -74,7 +70,7 @@ export class BaseTrait {
         /**
          * @type {UUID}
          */
-        this.__uuid = UUID.create(4);
+        this.__uuid = uuid();
         /**
          * @type {Logger}
          */
@@ -82,21 +78,14 @@ export class BaseTrait {
         /**
          * @type {Object}
          */
-        this.settings = (this.activeRoute || {}).settings | {};
-    }
-    /**
-     * Obtain current navigation instruction for the application.
-     * @return {Aurelia.NavigationInstructions|null}
-     */
-    get activeRoute() {
-        return (this.router || {}).currentInstruction;
+        this.settings = {};
     }
     /**
      * Reduce class to a string identifier
      * @return {String}
      */
     toString() {
-        return `${parentClassName(this) || 'Object'}/${className(this)}/${this.__uuid.toString()}`;
+        return `${parentClassName(this) || 'Object'}/${className(this)}@${this.__uuid}`;
     }
 }
 
