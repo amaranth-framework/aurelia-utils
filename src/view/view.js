@@ -56,7 +56,7 @@ import { Base } from './base';
 
 /**
  * Abstract Class for all Model Views (Components) used within the project
- * @extends {ModelView}
+ * @extends {Base}
  * @implements {ComponentAttached}
  * @implements {ComponentBind}
  * @implements {ComponentCreate}

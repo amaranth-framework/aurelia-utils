@@ -1,5 +1,5 @@
 
-export { UuidAttribute } from './attibute';
+export { UuidAttribute } from './attributes';
 
 export { Eventable, Loggable, RESTable } from './traits';
 
