@@ -1,2 +1,0 @@
-
-export { UuidAttribute } from './uuid';
