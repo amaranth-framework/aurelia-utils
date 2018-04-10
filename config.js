@@ -7,7 +7,7 @@ System.config({
     },
 
     map: {
-        'amaranth-utils': 'npm:amaranth-utils@0.0.1',
+        'amaranth-utils': 'npm:amaranth-utils@0.0.4',
         'aurelia-api': 'npm:aurelia-api@3.1.1',
         'aurelia-configuration': 'npm:aurelia-configuration@2.0.0',
         'aurelia-dependency-injection': 'npm:aurelia-dependency-injection@1.3.2',
@@ -20,6 +20,7 @@ System.config({
         'aurelia-router': 'npm:aurelia-router@1.5.0',
         'aurelia-templating': 'npm:aurelia-templating@1.7.0',
         'aurelia-validation': 'npm:aurelia-validation@1.1.3',
+        'lodash': 'npm:lodash@4.17.5',
         'github:jspm/nodelibs-assert@0.1.0': {
             'assert': 'npm:assert@1.4.1'
         },
@@ -34,6 +35,10 @@ System.config({
         },
         'github:jspm/nodelibs-vm@0.1.0': {
             'vm-browserify': 'npm:vm-browserify@0.0.4'
+        },
+        'npm:amaranth-utils@0.0.4': {
+            'js-cookie': 'npm:js-cookie@2.2.0',
+            'uuid-js': 'npm:uuid-js@0.7.5'
         },
         'npm:assert@1.4.1': {
             'assert': 'github:jspm/nodelibs-assert@0.1.0',

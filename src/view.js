@@ -1,9 +1,9 @@
 /**
- * Aurelia Skeleton (https://github.com/amaranth-framework/aurelia-skeleton/)
+ * Amaranth Aurelia Utils Library (https://github.com/amaranth-framework/aurelia-utils/)
  *
- * @link      https://github.com/amaranth-framework/aurelia-skeleton/ for the canonical source repository
+ * @link      https://github.com/amaranth-framework/aurelia-utils/ for the canonical source repository
  * @copyright Copyright (c) 2007-2017 IT Media Connect (http://itmediaconnect.ro)
- * @license   https://github.com/amaranth-framework/aurelia-skeleton/LICENSE MIT License
+ * @license   https://github.com/amaranth-framework/aurelia-utils/LICENSE MIT License
  */
 
 /**
@@ -24,7 +24,6 @@
 /**
  * @external {Router} http://aurelia.io/docs/api/router
  */
-
 /**
  * @external {ComponentAttached} http://aurelia.io/docs/api/templating/interface/ComponentAttached/
  */
@@ -68,15 +67,16 @@
  * @external {RouteConfig} http://aurelia.io/docs/api/router/interface/RouteConfig
  */
 
-// import { inject, LogManager } from 'aurelia-framework';
+import { className, extend, parentClassName, traits, traitsExclude, uuid } from 'amaranth-utils';
+import { Container, inject, NewInstance } from 'aurelia-dependency-injection';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { AureliaConfiguration } from 'aurelia-configuration';
-import { inject } from 'aurelia-framework';
 import { I18N } from 'aurelia-i18n';
 import { Router } from 'aurelia-router';
-import { className, extend, parentClassName, traits, traitsExclude, uuid } from 'amaranth-utils';
+import { validateTrigger, ValidationController } from 'aurelia-validation';
+import _ from 'lodash';
 
-import { Eventable, Loggable } from './traits';
+import { Eventable, Loggable, RESTable } from './traits';
 
 /**
  * Aurelia class base for almost each functionality we may build.
@@ -85,7 +85,7 @@ import { Eventable, Loggable } from './traits';
  * @extends {Loggable}
  */
 @inject(AureliaConfiguration, EventAggregator, I18N, Router)
-export class BaseTrait {
+export class Base {
     /**
      * Constructor
      * @param {AureliaConfiguration} config Aurelia configuration plugin
@@ -131,13 +131,8 @@ export class BaseTrait {
         return `${parentClassName(this) || 'Object'}/${className(this)}@${this.__uuid}`;
     }
 }
-
-/**
- * Aurelia class base for almost each functionality we may build.
- * @abstract
- */
-export const Base = traits(
-    BaseTrait,
+traits(
+    Base,
     traitsExclude(Loggable, 'toString'),
     Eventable
 );
@@ -449,7 +444,7 @@ export class Template extends View {
  * @extends {Component}
  */
 @inject(NewInstance.of(ValidationController))
-export class ModelTrait extends Component {
+export class Model extends Component {
     /**
      * Model Index Field Name
      * @type {String}
@@ -623,7 +618,7 @@ export class ModelTrait extends Component {
         });
     }
 }
-
+traits(Model, RESTable);
 
 /**
  * Experimental decorator for mentioning the model's table properties.
@@ -732,8 +727,3 @@ export function property(...args) {
     return decorator.apply(null, args);
 }
 
-/**
- * Aurelia class base for almost each functionality we may build.
- * @abstract
- */
-export const Model = traits(BaseTrait, RESTable);
